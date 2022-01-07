@@ -1,3 +1,7 @@
+
 tasks:
   - init: |
       yarn install
+vscode:
+  extensions:
+    - juanblanco.solidity
