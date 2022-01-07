@@ -1,0 +1,8 @@
+{
+  "name": "smart-contracts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/NetBlockGit/smart-contracts.git",
+  "author": "thisisommore <ommore501@gmail.com>",
+  "license": "MIT"
+}
