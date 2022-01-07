@@ -4,5 +4,8 @@
   "main": "index.js",
   "repository": "https://github.com/NetBlockGit/smart-contracts.git",
   "author": "thisisommore <ommore501@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "hardhat": "^2.8.1"
+  }
 }
