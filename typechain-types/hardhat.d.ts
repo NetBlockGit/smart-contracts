@@ -13,10 +13,19 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
+      name: "Blocklist",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Blocklist__factory>;
+    getContractFactory(
       name: "Greeter",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Greeter__factory>;
 
+    getContractAt(
+      name: "Blocklist",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Blocklist>;
     getContractAt(
       name: "Greeter",
       address: string,
