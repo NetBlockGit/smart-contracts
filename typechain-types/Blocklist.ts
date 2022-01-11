@@ -20,17 +20,12 @@ import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 export interface BlocklistInterface extends utils.Interface {
   functions: {
     "addHostName(string)": FunctionFragment;
-    "blockcount()": FunctionFragment;
-    "blocklist(uint256)": FunctionFragment;
+    "hostlist(uint256)": FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: "addHostName", values: [string]): string;
   encodeFunctionData(
-    functionFragment: "blockcount",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "blocklist",
+    functionFragment: "hostlist",
     values: [BigNumberish]
   ): string;
 
@@ -38,8 +33,7 @@ export interface BlocklistInterface extends utils.Interface {
     functionFragment: "addHostName",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "blockcount", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "blocklist", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "hostlist", data: BytesLike): Result;
 
   events: {};
 }
@@ -72,57 +66,44 @@ export interface Blocklist extends BaseContract {
 
   functions: {
     addHostName(
-      _hostName: string,
+      newValue: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    blockcount(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    blocklist(arg0: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
+    hostlist(arg0: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
   };
 
   addHostName(
-    _hostName: string,
+    newValue: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  blockcount(overrides?: CallOverrides): Promise<BigNumber>;
-
-  blocklist(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
+  hostlist(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
-    addHostName(_hostName: string, overrides?: CallOverrides): Promise<void>;
+    addHostName(newValue: string, overrides?: CallOverrides): Promise<void>;
 
-    blockcount(overrides?: CallOverrides): Promise<BigNumber>;
-
-    blocklist(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    hostlist(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {};
 
   estimateGas: {
     addHostName(
-      _hostName: string,
+      newValue: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    blockcount(overrides?: CallOverrides): Promise<BigNumber>;
-
-    blocklist(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    hostlist(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
     addHostName(
-      _hostName: string,
+      newValue: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    blockcount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    blocklist(
+    hostlist(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
