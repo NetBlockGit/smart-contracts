@@ -1,20 +1,9 @@
 pragma solidity ^0.8.0;
 
-contract Blocklist  {
-    uint256 public blockcount = 0;
-    mapping(uint256 => string) public blocklist;
+contract Blocklist{
+    string[] public hostlist;
 
-    function addHostName(string memory _hostName) 
-
-        public 
-    {
-  
-        blocklist[blockcount]= (_hostName);
-        incrementCount();
-        
-    }
-
-    function incrementCount() internal{
-        blockcount ++;
+    function addHostName(string memory newValue) public {
+        hostlist.push(newValue);
     }
 }
