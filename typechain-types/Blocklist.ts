@@ -20,10 +20,15 @@ import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 export interface BlocklistInterface extends utils.Interface {
   functions: {
     "addHostName(string)": FunctionFragment;
+    "getHostList()": FunctionFragment;
     "hostlist(uint256)": FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: "addHostName", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "getHostList",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "hostlist",
     values: [BigNumberish]
@@ -31,6 +36,10 @@ export interface BlocklistInterface extends utils.Interface {
 
   decodeFunctionResult(
     functionFragment: "addHostName",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getHostList",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "hostlist", data: BytesLike): Result;
@@ -70,6 +79,8 @@ export interface Blocklist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    getHostList(overrides?: CallOverrides): Promise<[string[]]>;
+
     hostlist(arg0: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
   };
 
@@ -78,10 +89,14 @@ export interface Blocklist extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  getHostList(overrides?: CallOverrides): Promise<string[]>;
+
   hostlist(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
     addHostName(newValue: string, overrides?: CallOverrides): Promise<void>;
+
+    getHostList(overrides?: CallOverrides): Promise<string[]>;
 
     hostlist(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
   };
@@ -94,6 +109,8 @@ export interface Blocklist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    getHostList(overrides?: CallOverrides): Promise<BigNumber>;
+
     hostlist(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
   };
 
@@ -102,6 +119,8 @@ export interface Blocklist extends BaseContract {
       newValue: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
+
+    getHostList(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     hostlist(
       arg0: BigNumberish,

@@ -2,9 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { Blocklist } from "./Blocklist";
-export type { Blocklist2 } from "./Blocklist2";
 export type { Greeter } from "./Greeter";
 
 export { Blocklist__factory } from "./factories/Blocklist__factory";
-export { Blocklist2__factory } from "./factories/Blocklist2__factory";
 export { Greeter__factory } from "./factories/Greeter__factory";

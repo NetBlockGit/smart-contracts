@@ -17,10 +17,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Blocklist__factory>;
     getContractFactory(
-      name: "Blocklist2",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.Blocklist2__factory>;
-    getContractFactory(
       name: "Greeter",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Greeter__factory>;
@@ -30,11 +26,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.Blocklist>;
-    getContractAt(
-      name: "Blocklist2",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.Blocklist2>;
     getContractAt(
       name: "Greeter",
       address: string,
