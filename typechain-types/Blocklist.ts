@@ -20,11 +20,23 @@ import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 export interface BlocklistInterface extends utils.Interface {
   functions: {
     "addHostName(string)": FunctionFragment;
+    "authorizeUser(address)": FunctionFragment;
+    "authorizedUsers(address)": FunctionFragment;
     "getHostList()": FunctionFragment;
     "hostlist(uint256)": FunctionFragment;
+    "owner()": FunctionFragment;
+    "unAuthorizeUser(address)": FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: "addHostName", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "authorizeUser",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "authorizedUsers",
+    values: [string]
+  ): string;
   encodeFunctionData(
     functionFragment: "getHostList",
     values?: undefined
@@ -33,9 +45,22 @@ export interface BlocklistInterface extends utils.Interface {
     functionFragment: "hostlist",
     values: [BigNumberish]
   ): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "unAuthorizeUser",
+    values: [string]
+  ): string;
 
   decodeFunctionResult(
     functionFragment: "addHostName",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "authorizeUser",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "authorizedUsers",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -43,6 +68,11 @@ export interface BlocklistInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "hostlist", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "unAuthorizeUser",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -79,9 +109,26 @@ export interface Blocklist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    authorizeUser(
+      userAddr: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    authorizedUsers(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
     getHostList(overrides?: CallOverrides): Promise<[string[]]>;
 
     hostlist(arg0: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
+
+    owner(overrides?: CallOverrides): Promise<[string]>;
+
+    unAuthorizeUser(
+      userAddr: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
   };
 
   addHostName(
@@ -89,16 +136,38 @@ export interface Blocklist extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  authorizeUser(
+    userAddr: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  authorizedUsers(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+
   getHostList(overrides?: CallOverrides): Promise<string[]>;
 
   hostlist(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
+  owner(overrides?: CallOverrides): Promise<string>;
+
+  unAuthorizeUser(
+    userAddr: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
     addHostName(newValue: string, overrides?: CallOverrides): Promise<void>;
+
+    authorizeUser(userAddr: string, overrides?: CallOverrides): Promise<void>;
+
+    authorizedUsers(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
     getHostList(overrides?: CallOverrides): Promise<string[]>;
 
     hostlist(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
+
+    owner(overrides?: CallOverrides): Promise<string>;
+
+    unAuthorizeUser(userAddr: string, overrides?: CallOverrides): Promise<void>;
   };
 
   filters: {};
@@ -109,9 +178,26 @@ export interface Blocklist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    authorizeUser(
+      userAddr: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    authorizedUsers(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     getHostList(overrides?: CallOverrides): Promise<BigNumber>;
 
     hostlist(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+
+    owner(overrides?: CallOverrides): Promise<BigNumber>;
+
+    unAuthorizeUser(
+      userAddr: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -120,11 +206,28 @@ export interface Blocklist extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    authorizeUser(
+      userAddr: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    authorizedUsers(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     getHostList(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     hostlist(
       arg0: BigNumberish,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    unAuthorizeUser(
+      userAddr: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };
 }
