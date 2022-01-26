@@ -25,6 +25,7 @@ export interface BlocklistInterface extends utils.Interface {
     "getHostList()": FunctionFragment;
     "hostlist(uint256)": FunctionFragment;
     "owner()": FunctionFragment;
+    "removeHostList(uint256)": FunctionFragment;
     "unAuthorizeUser(address)": FunctionFragment;
   };
 
@@ -46,6 +47,10 @@ export interface BlocklistInterface extends utils.Interface {
     values: [BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "removeHostList",
+    values: [BigNumberish]
+  ): string;
   encodeFunctionData(
     functionFragment: "unAuthorizeUser",
     values: [string]
@@ -69,6 +74,10 @@ export interface BlocklistInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "hostlist", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "removeHostList",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "unAuthorizeUser",
     data: BytesLike
@@ -125,6 +134,11 @@ export interface Blocklist extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
+    removeHostList(
+      index: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     unAuthorizeUser(
       userAddr: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -149,6 +163,11 @@ export interface Blocklist extends BaseContract {
 
   owner(overrides?: CallOverrides): Promise<string>;
 
+  removeHostList(
+    index: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   unAuthorizeUser(
     userAddr: string,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -166,6 +185,11 @@ export interface Blocklist extends BaseContract {
     hostlist(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
     owner(overrides?: CallOverrides): Promise<string>;
+
+    removeHostList(
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     unAuthorizeUser(userAddr: string, overrides?: CallOverrides): Promise<void>;
   };
@@ -193,6 +217,11 @@ export interface Blocklist extends BaseContract {
     hostlist(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
+
+    removeHostList(
+      index: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     unAuthorizeUser(
       userAddr: string,
@@ -224,6 +253,11 @@ export interface Blocklist extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    removeHostList(
+      index: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     unAuthorizeUser(
       userAddr: string,
