@@ -27,6 +27,10 @@ contract Blocklist {
         return hostlist;
     }
 
+    function removeHostList(uint index) public onlyAuthorized {
+        hostlist[index] = hostlist[hostlist.length - 1];
+        hostlist.pop();
+    }
     function authorizeUser(address userAddr) public onlyOwner {
         authorizedUsers[userAddr] = true;
     }
@@ -34,4 +38,5 @@ contract Blocklist {
     function unAuthorizeUser(address userAddr) public {
         authorizedUsers[userAddr] = false;
     }
+
 }
