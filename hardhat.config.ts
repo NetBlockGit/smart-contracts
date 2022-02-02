@@ -27,9 +27,9 @@ const config: any = {
   solidity: "0.8.4",
   networks: {
     maticmum: {
-      url: process.env.RPC,
+      url: process.env.RPC ?? "",
       accounts: {
-        mnemonic: process.env.MNEMONIC
+        mnemonic: process.env.MNEMONIC ?? ""
       }
     },
   },

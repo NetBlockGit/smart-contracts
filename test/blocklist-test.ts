@@ -12,7 +12,7 @@ describe("Blocklist", function () {
     await Blocklist.addHostName("ad.google.com");
     expect(await Blocklist.hostlist(0)).to.equal("ad.google.com");
     await Blocklist.authorizeUser(addr1.address);
-    await Blocklist.connect(addr1).addHostName("com.add.abz");
+    expect(await Blocklist.connect(addr1).addHostName("com.add.abz")).to.emit(Blocklist, "HostNameAdded").withArgs("com.add.abz");
     expect(await Blocklist.hostlist(1)).to.equal("com.add.abz");
   });
 
@@ -76,11 +76,12 @@ describe("Blocklist", function () {
     await Blocklist.addHostName("ad.test.com");
     await Blocklist.addHostName("ad.Duck.com");
     await Blocklist.addHostName("ad.gle.com");
-    await Blocklist.removeHostList(2);
+    expect(await Blocklist.removeHostList(2)).to.emit(Blocklist, "HostNameDeleted").withArgs(2);
     expect(await Blocklist.getHostList()).to.eql([
       "ad.google.com",
       "ad.test.com",
       "ad.gle.com",
     ]);
   });
+
 });

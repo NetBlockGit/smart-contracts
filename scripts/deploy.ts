@@ -13,6 +13,7 @@ async function main() {
   // await hre.run('compile');
 
   // We get the contract to deploy
+
   const Blocklist = await hre.ethers.getContractFactory("Blocklist");
   const blocklist = await Blocklist.deploy();
 
