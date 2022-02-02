@@ -5,6 +5,9 @@ contract Blocklist {
     mapping(address => bool) public authorizedUsers;
     address public owner;
 
+    event HostNameAdded(string hostname);
+    event HostNameDeleted(uint256 index);
+
     constructor() {
         owner = msg.sender;
         authorizedUsers[msg.sender] = true;
@@ -21,16 +24,19 @@ contract Blocklist {
 
     function addHostName(string memory newValue) public onlyAuthorized {
         hostlist.push(newValue);
+        emit HostNameAdded(newValue);
     }
 
     function getHostList() public view returns (string[] memory) {
         return hostlist;
     }
 
-    function removeHostList(uint index) public onlyAuthorized {
+    function removeHostList(uint256 index) public onlyAuthorized {
         hostlist[index] = hostlist[hostlist.length - 1];
         hostlist.pop();
+        emit HostNameDeleted(index);
     }
+
     function authorizeUser(address userAddr) public onlyOwner {
         authorizedUsers[userAddr] = true;
     }
@@ -38,5 +44,4 @@ contract Blocklist {
     function unAuthorizeUser(address userAddr) public {
         authorizedUsers[userAddr] = false;
     }
-
 }

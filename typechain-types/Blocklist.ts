@@ -13,7 +13,7 @@ import {
   Signer,
   utils,
 } from "ethers";
-import { FunctionFragment, Result } from "@ethersproject/abi";
+import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
 import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 
@@ -83,8 +83,25 @@ export interface BlocklistInterface extends utils.Interface {
     data: BytesLike
   ): Result;
 
-  events: {};
+  events: {
+    "HostNameAdded(string)": EventFragment;
+    "HostNameDeleted(uint256)": EventFragment;
+  };
+
+  getEvent(nameOrSignatureOrTopic: "HostNameAdded"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "HostNameDeleted"): EventFragment;
 }
+
+export type HostNameAddedEvent = TypedEvent<[string], { hostname: string }>;
+
+export type HostNameAddedEventFilter = TypedEventFilter<HostNameAddedEvent>;
+
+export type HostNameDeletedEvent = TypedEvent<
+  [BigNumber],
+  { index: BigNumber }
+>;
+
+export type HostNameDeletedEventFilter = TypedEventFilter<HostNameDeletedEvent>;
 
 export interface Blocklist extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -194,7 +211,13 @@ export interface Blocklist extends BaseContract {
     unAuthorizeUser(userAddr: string, overrides?: CallOverrides): Promise<void>;
   };
 
-  filters: {};
+  filters: {
+    "HostNameAdded(string)"(hostname?: null): HostNameAddedEventFilter;
+    HostNameAdded(hostname?: null): HostNameAddedEventFilter;
+
+    "HostNameDeleted(uint256)"(index?: null): HostNameDeletedEventFilter;
+    HostNameDeleted(index?: null): HostNameDeletedEventFilter;
+  };
 
   estimateGas: {
     addHostName(

@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-option go_package = "/protos";
-message ToggleBlockerRequest {}
-message ToggleBlockerResponse {}
-service Blocker {
-  rpc ToggleBlocker(ToggleBlockerRequest)
-      returns (ToggleBlockerResponse);
-}
